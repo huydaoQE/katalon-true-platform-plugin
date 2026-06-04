@@ -7,9 +7,8 @@
     {
       "name": "katalon-true-platform",
       "source": {
-        "source": "url",
-        "url": "https://github.com/huydaoQE/katalon-true-platform-plugin.git",
-        "ref": "main"
+        "source": "local",
+        "path": "./plugins/katalon-true-platform"
       },
       "policy": {
         "installation": "AVAILABLE",

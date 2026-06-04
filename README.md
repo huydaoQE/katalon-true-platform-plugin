@@ -1,57 +1,73 @@
-# Katalon True Platform Codex Plugin
+# Katalon True Platform Plugin Marketplace
 
-This plugin bundles Katalon True Platform/TestOps workflows for Codex.
+<img src="plugins/katalon-true-platform/assets/katalon-logo.svg" width="72" alt="Katalon logo">
 
-## Included Skills
+Codex plugin marketplace for Katalon True Platform/TestOps workflows.
 
-- `katalon-platform-setup`: Set up, verify, and troubleshoot Katalon MCP connectivity.
-- `katalon-create-test-cases`: Create, update, organize, and link manual test cases.
-- `katalon-execute-test`: Create manual runs, Run with AI, schedule automated suites, and summarize results.
-- `katalon-upload-report`: Run automation and upload Katalon, JUnit, or Playwright reports.
-- `katalon-release-analyze`: Analyze release readiness from Katalon quality data.
-- `katalon-trueplatform-testing`: End-to-end requirement-to-execution workflow.
+This repository is structured as a marketplace source so Codex can render plugin metadata, logo, description, and install policy before installation.
 
-## Bundled MCP Server
+## Install
 
-The plugin declares `katalon-prod-mcp` in `.mcp.json`:
+```bash
+codex plugin marketplace add huydaoQE/katalon-true-platform-plugin
+```
+
+If the marketplace is already configured, update it with:
+
+```bash
+codex plugin marketplace upgrade katalon-true-platform
+```
+
+Then open **Plugins** in Codex and install **Katalon True Platform**.
+
+## Why This Layout
+
+Codex reads `.agents/plugins/marketplace.json` from the marketplace root. The marketplace entry points to the plugin with a local path:
 
 ```json
 {
-  "mcpServers": {
-    "katalon-prod-mcp": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://prodgen3platform.katalon.io/mcp",
-        "--transport",
-        "http-first"
-      ]
-    }
+  "source": {
+    "source": "local",
+    "path": "./plugins/katalon-true-platform"
   }
 }
 ```
 
-Codex loads this MCP configuration from the plugin manifest through:
+That lets Codex inspect `plugins/katalon-true-platform/.codex-plugin/plugin.json` directly and display the full plugin name, logo, description, capabilities, and prompts in the Plugin Directory.
 
-```json
-{
-  "mcpServers": "./.mcp.json"
-}
-```
-
-`npx -y mcp-remote ...` installs or resolves the `mcp-remote` package when the MCP server is started. Authentication is handled through the browser/OAuth flow; do not paste passwords, tokens, cookies, JWTs, or callback URLs into chat.
-
-## Local Marketplace
-
-This workspace includes a repo-scoped marketplace at:
+## Repository Layout
 
 ```text
 .agents/plugins/marketplace.json
+plugins/katalon-true-platform/
+  .codex-plugin/plugin.json
+  .mcp.json
+  assets/katalon-logo.svg
+  skills/
 ```
 
-It exposes this plugin from:
+## Included Workflows
+
+- Set up and verify Katalon MCP connectivity.
+- Create, update, organize, and link manual test cases.
+- Execute manual runs, Run with AI, and automated suites.
+- Upload Katalon, JUnit, and Playwright reports.
+- Analyze release readiness from Katalon quality data.
+- Run end-to-end requirement-to-execution testing workflows.
+
+## Bundled MCP
+
+The plugin declares `katalon-prod-mcp`, backed by `mcp-remote`:
 
 ```text
-./plugins/katalon-true-platform
+npx -y mcp-remote https://prodgen3platform.katalon.io/mcp --transport http-first
 ```
+
+Authentication is handled through the browser/OAuth flow. Do not paste passwords, tokens, cookies, JWTs, or callback URLs into chat.
+
+## Plugin Metadata
+
+- Name: `katalon-true-platform`
+- Version: `0.1.0`
+- Category: `Productivity`
+- Capabilities: `Read`, `Write`, `Interactive`

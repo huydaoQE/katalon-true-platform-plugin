@@ -23,7 +23,7 @@ The plugin declares `katalon-prod-mcp` in `.mcp.json`:
       "args": [
         "-y",
         "mcp-remote",
-        "https://prodgen3platform.katalon.io/mcp",
+        "https://<your.sub.domain>.katalon.io/mcp",
         "--transport",
         "http-first"
       ]
@@ -40,7 +40,7 @@ Codex loads this MCP configuration from the plugin manifest through:
 }
 ```
 
-`npx -y mcp-remote ...` installs or resolves the `mcp-remote` package when the MCP server is started. Authentication is handled through the browser/OAuth flow; do not paste passwords, tokens, cookies, JWTs, or callback URLs into chat.
+Replace `<your.sub.domain>` with the Katalon subdomain for the workspace you want to use. `npx -y mcp-remote ...` installs or resolves the `mcp-remote` package when the MCP server is started. Authentication is handled through the browser/OAuth flow; do not paste passwords, tokens, cookies, JWTs, or callback URLs into chat.
 
 ## Marketplace Entry
 

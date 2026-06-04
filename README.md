@@ -60,10 +60,10 @@ plugins/katalon-true-platform/
 The plugin declares `katalon-prod-mcp`, backed by `mcp-remote`:
 
 ```text
-npx -y mcp-remote https://prodgen3platform.katalon.io/mcp --transport http-first
+npx -y mcp-remote https://<your.sub.domain>.katalon.io/mcp --transport http-first
 ```
 
-Authentication is handled through the browser/OAuth flow. Do not paste passwords, tokens, cookies, JWTs, or callback URLs into chat.
+Replace `<your.sub.domain>` with the Katalon subdomain for the workspace you want to use. Authentication is handled through the browser/OAuth flow. Do not paste passwords, tokens, cookies, JWTs, or callback URLs into chat.
 
 ## Plugin Metadata
 

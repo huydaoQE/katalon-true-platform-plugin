@@ -17,15 +17,34 @@ Be explicit about what can be verified from the current environment:
 
 Read `references/capability-boundaries.md` when explaining available operations.
 
+## Required Setup Inputs
+
+For setup requests, collect the minimum routing and authentication choices before writing or testing MCP config:
+
+1. Resolve the Katalon MCP endpoint:
+   - If the installed plugin config still contains `https://<your.sub.domain>.katalon.io/mcp`, ask for the Katalon subdomain or full MCP URL before attempting a connection.
+   - If the user or local config mentions more than one Katalon domain, list the candidate domains and ask which domain they want to work with.
+   - Normalize a bare subdomain such as `<your.sub.domain>` to `https://<your.sub.domain>.katalon.io/mcp`.
+2. Ask how the user wants to authenticate when auth is required:
+   - Browser OAuth flow with Codex restart/reload after login.
+   - CLI/local `mcp-remote` login bootstrap.
+   - Login email/account label only for account selection.
+3. Never ask for passwords, API tokens, cookies, JWTs, MFA codes, or OAuth callback URLs in chat. If the user offers "login information", accept only non-secret routing details such as login email, organization, domain, project name, or repository/Test Project name.
+4. After authentication succeeds and Katalon tools are available, call `list_projects`. If more than one project is returned, list the projects and ask which project to use before calling repository-specific tools.
+5. After project selection, call `list_repositories` with the selected `project_id`. If more than one repository/Test Project is returned and none is clearly implied by the user's request, list the repositories and ask which one to use.
+
 ## Connection Check
 
 Start every setup/debugging request with a non-destructive check:
 
-1. Search for Katalon/TestOps MCP tools using the available tool discovery mechanism.
-2. If tools exist, call `list_projects`.
-3. Call `list_repositories` after projects are available.
-4. Confirm at least one project and repository/Test Project can be discovered.
-5. If a requirement key or repo name is provided, verify access by searching or reading that target.
+1. Follow "Required Setup Inputs" first when the endpoint, domain, or auth route is not already resolved.
+2. Search for Katalon/TestOps MCP tools using the available tool discovery mechanism.
+3. If tools exist, call `list_projects`.
+4. If multiple projects are returned, list them and ask which project to use.
+5. Call `list_repositories` with the selected or only `project_id` after projects are available.
+6. If multiple repositories/Test Projects are returned and no repository is clearly implied, list them and ask which repository/Test Project to use.
+7. Confirm at least one project and repository/Test Project can be discovered.
+8. If a requirement key or repo name is provided, verify access by searching or reading that target.
 
 If Katalon tools are not exposed in the active Codex session, do not stop at "reload required" yet. First try the local proxy bootstrap in "MCP Remote OAuth Bootstrap" below. A successful bootstrap proves the account and endpoint are usable even if the current Codex tool host has not reloaded the server list.
 
@@ -42,18 +61,19 @@ Report the exact boundary:
 When MCP tools are missing:
 
 1. Inspect local Codex/plugin context for an existing Katalon MCP install path or configuration.
-2. If a Katalon remote URL is present but direct `url = ".../mcp"` does not expose tools in Codex, prefer configuring the MCP server through the `mcp-remote` wrapper:
+2. If the plugin or local config contains `https://<your.sub.domain>.katalon.io/mcp`, ask the user for the target Katalon subdomain or full MCP URL, then write the resolved endpoint into the local Codex MCP config. Do not leave the placeholder in an active user config.
+3. If a Katalon remote URL is present but direct `url = ".../mcp"` does not expose tools in Codex, prefer configuring the MCP server through the `mcp-remote` wrapper:
 
    ```toml
    [mcp_servers.katalon-prod-mcp]
    command = "npx"
-   args = ["-y", "mcp-remote", "https://<your-sub-domain>.katalon.io/mcp", "--transport", "http-first"]
+   args = ["-y", "mcp-remote", "https://<your.sub.domain>.katalon.io/mcp", "--transport", "http-first"]
    ```
 
-3. If the install command, package name, or server URL is not present in local context, use official Katalon-provided setup instructions or ask the user for the MCP package/source. Do not invent install commands.
-4. Configure only the minimum required MCP server entry for the user's Codex environment.
-5. Store secrets using the environment's secret mechanism or environment variables. Never write access tokens, passwords, cookies, or raw auth callback URLs into repo files, skill files, logs, or final answers.
-6. Re-run the connection check. Restart or reload the MCP host only if Katalon works through the local proxy but the current Codex session still does not expose the tools.
+4. If the install command, package name, or server URL is not present in local context, use official Katalon-provided setup instructions or ask the user for the MCP package/source. Do not invent install commands.
+5. Configure only the minimum required MCP server entry for the user's Codex environment.
+6. Store secrets using the environment's secret mechanism or environment variables. Never write access tokens, passwords, cookies, or raw auth callback URLs into repo files, skill files, logs, or final answers.
+7. Re-run the connection check. Restart or reload the MCP host only if Katalon works through the local proxy but the current Codex session still does not expose the tools.
 
 If the user explicitly asks to install but the environment does not permit plugin/MCP installation from the current session, give the exact missing prerequisite and the safest next step.
 
@@ -62,7 +82,7 @@ If the user explicitly asks to install but the environment does not permit plugi
 Use this when Katalon MCP tools are missing from the active session or direct remote MCP config returns `401 Invalid JWT token format`.
 
 1. Ask only for non-secret information needed to target the right server or verify access, such as:
-   - Katalon subdomain or full MCP URL, for example `https://prodgen3platform.katalon.io/mcp`.
+   - Katalon subdomain or full MCP URL, for example `https://<your.sub.domain>.katalon.io/mcp`.
    - Project name or project ID.
    - Repository/Test Project name, if the user wants a specific target verified.
    - Login email, only if it helps the user choose the right account in the browser.
@@ -70,7 +90,7 @@ Use this when Katalon MCP tools are missing from the active session or direct re
 3. Run the proxy with the Katalon endpoint:
 
    ```sh
-   npx -y mcp-remote "https://<your-sub-domain>.katalon.io/mcp" --transport http-first
+   npx -y mcp-remote "https://<your.sub.domain>.katalon.io/mcp" --transport http-first
    ```
 
    If this prints an authorization URL or opens the browser, wait for the user/browser callback to complete. `mcp-remote` stores OAuth state under its own auth cache, such as `~/.mcp-auth`, not in the workspace.
@@ -86,7 +106,7 @@ Known working Codex stanza:
 ```toml
 [mcp_servers.katalon-prod-mcp]
 command = "npx"
-args = ["-y", "mcp-remote", "https://prodgen3platform.katalon.io/mcp", "--transport", "http-first"]
+args = ["-y", "mcp-remote", "https://<your.sub.domain>.katalon.io/mcp", "--transport", "http-first"]
 ```
 
 Known verification observations:
@@ -102,6 +122,9 @@ When tools exist but calls fail:
 - Treat 401/403-style failures as auth or account-scope problems.
 - Ask the user to authenticate through the platform's secure browser flow. Never ask them to paste secrets into normal chat when a secure mechanism exists.
 - You may ask for non-secret account routing details, such as subdomain, project ID/name, repository name, and login email. The user should enter passwords/SSO/MFA only in the browser or secure credential flow.
+- If multiple authenticated Katalon domains are available, ask which domain to use before selecting projects.
+- If multiple projects are available, list the project names/IDs and ask which project to use before listing repositories.
+- If multiple repositories/Test Projects are available, list them and ask which repository/Test Project to use unless the user's request clearly names one.
 - For empty project/repository results, verify account membership, organization, project role, and repository/Test Project access.
 - For requirement lookup failures, verify that Jira/Azure sync exists and the requirement key belongs to the connected project.
 

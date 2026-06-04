@@ -1,0 +1,35 @@
+{
+  "name": "katalon-true-platform",
+  "version": "0.1.0",
+  "description": "Katalon True Platform workflows for test design, execution, report upload, setup, and release analysis.",
+  "author": {
+    "name": "Katalon"
+  },
+  "keywords": [
+    "katalon",
+    "testops",
+    "true-platform",
+    "testing",
+    "qa"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Katalon True Platform",
+    "shortDescription": "Design, run, upload, and analyze Katalon tests.",
+    "longDescription": "Bundle Katalon True Platform/TestOps workflows for MCP setup, requirement-based manual test creation, manual and automated execution, report upload, and release readiness analysis.",
+    "developerName": "Katalon",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "Set up Katalon MCP and verify my projects.",
+      "Create manual tests from requirement CEL-6.",
+      "Run a Katalon suite with AI and summarize results."
+    ],
+    "brandColor": "#00A3A3"
+  }
+}

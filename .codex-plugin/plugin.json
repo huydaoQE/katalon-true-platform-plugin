@@ -30,6 +30,8 @@
       "Create manual tests from requirement CEL-6.",
       "Run a Katalon suite with AI and summarize results."
     ],
-    "brandColor": "#00A3A3"
+    "brandColor": "#00A3A3",
+    "composerIcon": "./assets/katalon-logo.svg",
+    "logo": "./assets/katalon-logo.svg"
   }
 }

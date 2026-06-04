@@ -1,7 +1,7 @@
 {
   "name": "katalon-true-platform",
-  "version": "0.1.0",
-  "description": "Katalon True Platform workflows for test design, execution, report upload, setup, and release analysis.",
+  "version": "0.1.0+codex.20260604161239",
+  "description": "Katalon True Platform workflows for test design, execution, Playwright automation, report upload, setup, and release analysis.",
   "author": {
     "name": "huydaoQE",
     "url": "https://github.com/huydaoQE"
@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Katalon True Platform",
     "shortDescription": "Design, run, upload, and analyze Katalon tests.",
-    "longDescription": "Bundle Katalon True Platform/TestOps workflows for MCP setup, requirement-based manual test creation, manual and automated execution, report upload, and release readiness analysis.",
+    "longDescription": "Bundle Katalon True Platform/TestOps workflows for MCP setup, requirement-based manual test creation, manual and automated execution, Playwright automation generation, Playwright execution with report upload, and release readiness analysis.",
     "developerName": "huydaoQE",
     "category": "Productivity",
     "capabilities": [
@@ -32,7 +32,9 @@
     "defaultPrompt": [
       "Set up Katalon MCP and verify my projects.",
       "Create manual tests from requirement CEL-6.",
-      "Run a Katalon suite with AI and summarize results."
+      "Run a Katalon suite with AI and summarize results.",
+      "Generate a Playwright script from a Katalon test case.",
+      "Execute a Playwright suite and upload the report to Katalon Platform."
     ],
     "brandColor": "#00A3A3",
     "composerIcon": "./assets/katalon-logo.svg",

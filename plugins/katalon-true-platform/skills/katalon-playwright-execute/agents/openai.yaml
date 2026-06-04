@@ -1,0 +1,4 @@
+interface:
+  display_name: "Katalon Playwright Execute"
+  short_description: "Run Playwright and upload Katalon reports"
+  default_prompt: "Run a Playwright script or suite, collect the report, upload it to Katalon Platform with the Katalon Playwright reporter or CLI flow, and verify the uploaded result."

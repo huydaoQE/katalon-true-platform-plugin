@@ -8,6 +8,8 @@ This plugin bundles Katalon True Platform/TestOps workflows for Codex.
 - `katalon-create-test-cases`: Create, update, organize, and link manual test cases.
 - `katalon-execute-test`: Create manual runs, Run with AI, schedule automated suites, and summarize results.
 - `katalon-upload-report`: Run automation and upload Katalon, JUnit, or Playwright reports.
+- `katalon-test-case-to-playwright-script`: Convert Katalon Platform manual test cases into Playwright TypeScript automation with POM and fixtures.
+- `katalon-playwright-execute`: Execute Playwright scripts or suites, upload reports to Katalon Platform, and return the result URL.
 - `katalon-release-analyze`: Analyze release readiness from Katalon quality data.
 - `katalon-trueplatform-testing`: End-to-end requirement-to-execution workflow.
 

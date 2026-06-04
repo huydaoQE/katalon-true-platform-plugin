@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "description": "Katalon True Platform workflows for test design, execution, report upload, setup, and release analysis.",
   "author": {
-    "name": "Katalon"
+    "name": "huydaoQE",
+    "url": "https://github.com/huydaoQE"
   },
+  "homepage": "https://docs.katalon.com/katalon-platform/testops-mcp-server",
+  "repository": "https://github.com/huydaoQE/katalon-true-platform-plugin",
+  "license": "MIT",
   "keywords": [
     "katalon",
     "testops",
@@ -18,7 +22,7 @@
     "displayName": "Katalon True Platform",
     "shortDescription": "Design, run, upload, and analyze Katalon tests.",
     "longDescription": "Bundle Katalon True Platform/TestOps workflows for MCP setup, requirement-based manual test creation, manual and automated execution, report upload, and release readiness analysis.",
-    "developerName": "Katalon",
+    "developerName": "huydaoQE",
     "category": "Productivity",
     "capabilities": [
       "Read",
@@ -32,6 +36,10 @@
     ],
     "brandColor": "#00A3A3",
     "composerIcon": "./assets/katalon-logo.svg",
-    "logo": "./assets/katalon-logo.svg"
+    "logo": "./assets/katalon-logo.svg",
+    "websiteURL": "https://docs.katalon.com/katalon-platform/testops-mcp-server",
+    "privacyPolicyURL": "https://katalon.com/terms#privacy-policy",
+    "termsOfServiceURL": "https://katalon.com/terms",
+    "screenshots": []
   }
 }

@@ -69,5 +69,6 @@ Authentication is handled through the browser/OAuth flow. Do not paste passwords
 
 - Name: `katalon-true-platform`
 - Version: `0.1.0`
+- Publisher: `huydaoQE`
 - Category: `Productivity`
 - Capabilities: `Read`, `Write`, `Interactive`

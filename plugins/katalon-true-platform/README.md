@@ -1,6 +1,6 @@
-# Katalon True Platform Codex Plugin
+# Katalon True Platform Plugin
 
-This plugin bundles Katalon True Platform/TestOps workflows for Codex.
+This plugin bundles Katalon True Platform/TestOps workflows for Codex and Claude Code. The platform wrappers live in `.codex-plugin/plugin.json` and `.claude-plugin/plugin.json`; the skills and assets are shared.
 
 ## Included Skills
 
@@ -15,7 +15,7 @@ This plugin bundles Katalon True Platform/TestOps workflows for Codex.
 
 ## Bundled MCP Server
 
-The plugin declares `katalon-prod-mcp` in `.mcp.json`:
+The Codex wrapper declares `katalon-prod-mcp` in `.mcp.json`:
 
 ```json
 {
@@ -44,12 +44,15 @@ Codex loads this MCP configuration from the plugin manifest through:
 
 Replace `<your.sub.domain>` with the Katalon subdomain for the workspace you want to use. `npx -y mcp-remote ...` installs or resolves the `mcp-remote` package when the MCP server is started. Authentication is handled through the browser/OAuth flow; do not paste passwords, tokens, cookies, JWTs, or callback URLs into chat.
 
+Claude Code uses the same bundled skills. If Claude Code does not load `.mcp.json` from the plugin automatically in your environment, configure the same Katalon MCP server in Claude's MCP configuration before using the MCP-dependent workflows.
+
 ## Marketplace Entry
 
-This plugin is distributed through the repository marketplace at:
+This plugin is distributed through the repository marketplaces at:
 
 ```text
 .agents/plugins/marketplace.json
+.claude-plugin/marketplace.json
 ```
 
 It exposes this plugin from:
